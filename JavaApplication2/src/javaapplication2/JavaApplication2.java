@@ -25,6 +25,7 @@ public class JavaApplication2 {
          HashMap m = new HashMap();
         // primer sumando
         int sumando1;
+        
         System.out.print("introduce el primer numero:");
         sumando1= sc.nextInt();
         
