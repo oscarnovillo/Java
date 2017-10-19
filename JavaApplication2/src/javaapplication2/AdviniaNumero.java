@@ -16,21 +16,25 @@ public class AdviniaNumero {
     public static void main(String[] args) {
         //elegir numero aleatorio
         Random generadorNumerosAleatorios = new Random();
+
+        int num = 0;
+        num = 20;
         int aleatorio = generadorNumerosAleatorios.nextInt(50) + 1;
-
-        //pedir numero al usuario 
-        int num = 20;
-        boolean b = true;
-
-        //comprobar si es igual, mayor o menor
-        if (num == aleatorio) {
-            System.out.println("ok acertaste.");
-        } else if (num > aleatorio) {
-            System.out.println("mayor");
-        } else if (num < aleatorio) {
-            System.out.println("menor");
-        }
-        //sacar por pantalla lo que pasa
+        do {
+            //pedir numero al usuario 
+            num = 20;
+            //comprobar si es igual, mayor o menor
+            String mensaje = "";
+            if (num == aleatorio) {
+                mensaje = "ok acertaste." + "hoih";
+            } else if (num > aleatorio) {
+                mensaje = "mayor";
+            } else if (num < aleatorio) {
+                mensaje = "menor";
+            } else {
+            }//sacar por pantalla lo que pasa
+            System.out.println(mensaje);
+        }while (num != aleatorio) ;
         // volver a pedir numero si no esta bien, ir arriba
     }
 
