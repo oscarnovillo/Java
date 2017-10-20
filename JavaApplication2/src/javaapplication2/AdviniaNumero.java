@@ -18,7 +18,7 @@ public class AdviniaNumero {
         Random generadorNumerosAleatorios = new Random();
 
         int num = 0;
-        num = 20;
+
         int aleatorio = generadorNumerosAleatorios.nextInt(50) + 1;
         do {
             //pedir numero al usuario 
