@@ -16,11 +16,14 @@ public class AdviniaNumero {
     public static void main(String[] args) {
         //elegir numero aleatorio
         Random generadorNumerosAleatorios = new Random();
-
+        int rangoMax = 8;
+        int rangoMin = 3;
         int num = 0;
 
-        int aleatorio = generadorNumerosAleatorios.nextInt(50) + 1;
-        do {
+        int aleatorio = generadorNumerosAleatorios.nextInt(rangoMax-rangoMin+1) + rangoMin;
+         int contador = 0;
+         do {
+           contador  ++;
             //pedir numero al usuario 
             num = 20;
             //comprobar si es igual, mayor o menor
@@ -34,7 +37,9 @@ public class AdviniaNumero {
             } else {
             }//sacar por pantalla lo que pasa
             System.out.println(mensaje);
-        }while (num != aleatorio) ;
+        }while ( (num != aleatorio)
+           && 
+           (contador !=5));
         // volver a pedir numero si no esta bien, ir arriba
     }
 
