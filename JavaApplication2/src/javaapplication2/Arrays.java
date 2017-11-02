@@ -5,6 +5,8 @@
  */
 package javaapplication2;
 
+import java.util.Scanner;
+
 /**
  *
  * @author user
@@ -12,6 +14,7 @@ package javaapplication2;
 public class Arrays {
 
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
         int[] numeros = new int[10];
         numeros[0] = 1;
         numeros[4] = 3;
@@ -30,6 +33,10 @@ public class Arrays {
         int numeroCartas = 40;
         
         int []cartas2 = new int[numeroCartas];
+        for ( int i=0;i<cartas2.length;i++)
+        {
+            cartas2[i] = sc.nextInt();
+        }
         int []cartasMitad = new int[numeroCartas/2];
         
         
