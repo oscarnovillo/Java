@@ -12,10 +12,13 @@ package javaapplication2;
 public class ArrayNumeroParesImpares {
     
     public static void main(String[] args) {
-        //declarar scanner y array numeros
+        //declarar scanner 
+      
         
         //pedir numero de numeros a leer
         
+        //declarar array de numeros a leer
+  
         //pedir numeros y meterlos en el array
         
         
@@ -24,7 +27,6 @@ public class ArrayNumeroParesImpares {
         //declarar array pares e impares
         
         //recorrer array para meter los pares e impares en su array
-        
         
         //recorrer array de pares dar media
         
