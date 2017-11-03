@@ -14,6 +14,8 @@ import java.util.Scanner;
 public class ArrayNumeroParesImpares {
 
     public static void main(String[] args) {
+        int[] pares = null;
+        int n=0;
         //declarar scanner 
         Scanner sc = new Scanner(System.in);
 
@@ -39,7 +41,7 @@ public class ArrayNumeroParesImpares {
             }
         }
         //declarar array pares e impares
-        int[] pares = new int[numPares];
+        pares = new int[numPares];
         int[] impares = new int[numImpares];
 
         //recorrer array para meter los pares e impares en su array
