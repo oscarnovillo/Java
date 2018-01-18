@@ -18,6 +18,7 @@ public class ConPaquete {
     private char letra;
 
     public ConPaquete() {
+        letra = 'c';
     }
 
     public ConPaquete(int valor, boolean hecho, char letra) {
