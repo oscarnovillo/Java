@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package modelo;
+package polideportivo.modelo;
 
 /**
  *
@@ -45,6 +45,11 @@ public class Horario {
 
     public void setDias(String dias) {
         this.dias = dias;
+    }
+
+    @Override
+    public String toString() {
+        return "Horario{" + "horaInicio=" + horaInicio + ", horaFin=" + horaFin + ", dias=" + dias + '}';
     }
     
     
