@@ -29,6 +29,23 @@ public class Actividad {
         alumnos = new Alumno[this.plazas];
     }
 
+   public boolean delAlumno(Alumno a){
+       boolean ok = false;
+       for (int i=0;i<this.alumnos.length;i++)
+           
+       {
+           if (a.equals(this.alumnos[i]))
+           {
+               int ultimo = plazas-plazasLibres-1;
+               alumnos[i] = alumnos[ultimo];
+               alumnos[ultimo] = null;
+               plazasLibres ++;
+           }
+           
+       }
+       return ok;
+   }
+    
     public boolean addAlumno(Alumno a) {
         boolean ok = false;
         if (plazasLibres > 0) {
