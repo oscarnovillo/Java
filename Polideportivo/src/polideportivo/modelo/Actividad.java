@@ -98,7 +98,15 @@ public class Actividad {
 
     @Override
     public String toString() {
-        return "Actividad{" + "tipo=" + tipo + ", \n precio=" + precio + "€, \nplazasLibres=" + plazasLibres + ", horario=" + horario + '}';
+        String imprimir = "Actividad{" + "tipo=" + tipo + ", \n precio=" + precio + "€, \nplazasLibres=" + plazasLibres + ", horario=" + horario + '}';
+        
+        for (int i =0;i<alumnos.length;i++)
+        {
+            imprimir += alumnos[i].toString();
+        }
+        
+        imprimir += "\n";
+        return imprimir;
     }
 
 }
