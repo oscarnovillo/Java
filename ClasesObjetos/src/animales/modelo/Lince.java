@@ -10,6 +10,10 @@ package animales.modelo;
  * @author user
  */
 public class Lince extends Animal{
+
+    public Lince(String nombre) {
+        super(nombre);
+    }
     
     
     public void cazar(ICazable caza)

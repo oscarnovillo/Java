@@ -11,6 +11,10 @@ package animales.modelo;
  */
 public class Rata extends Animal implements ICazable{
 
+    public Rata(String nombre) {
+        super(nombre);
+    }
+
     
     
     @Override
