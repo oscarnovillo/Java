@@ -25,6 +25,7 @@ public class Oso extends Animal implements ICazable {
         }
     }
 
+    
     public void alimentar(Object comida) {
         if (vivo) {
             tiempoVida += 200;
