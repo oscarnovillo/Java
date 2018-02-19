@@ -5,6 +5,7 @@
  */
 package HasMapExample;
 
+import Fechas.Constantes;
 import animales.modelo.Oso;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -57,10 +58,8 @@ public class HashMap1 {
 
         Map<Integer, Oso> hOsos = new LinkedHashMap<>();
 
-       
-            hOsos.put(1, happy);
-            System.out.println(hOsos.get(20).getNumPatas());
-        
+        hOsos.put(Constantes.ADMIN_ID, happy);
+        System.out.println(hOsos.get(20).getNumPatas());
 
     }
 
