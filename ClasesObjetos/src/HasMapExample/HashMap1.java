@@ -60,6 +60,16 @@ public class HashMap1 {
 
         hOsos.put(Constantes.ADMIN_ID, happy);
         System.out.println(hOsos.get(20).getNumPatas());
+        
+        // mirar si existe un elemento en un hash
+        Oso existe = hOsos.get("noexiste");
+        if (existe == null)
+        {
+            System.out.println("no existe");
+        }
+        
+        
+        
 
     }
 
