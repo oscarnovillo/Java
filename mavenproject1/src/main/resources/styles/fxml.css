@@ -1,0 +1,15 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+
+}
+.buttonAzul{
+    background-color: blue;
+    
+    -fx-background-color: blue;
+    
+    -fx-text-fill: white;
+    
+}
