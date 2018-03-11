@@ -8,6 +8,7 @@ package fx;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,6 +16,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 /**
  * FXML Controller class
@@ -34,6 +36,11 @@ public class FXMLSceneController implements Initializable {
         //final Stage stage = (Stage) fxUser.getScene().getWindow();
         //a.initOwner(stage);
         a.showAndWait();
+        
+//         FadeTransition ft = new FadeTransition(Duration.millis(5000), fxUser);
+//    ft.setFromValue(1.0);
+//    ft.setToValue(0.0);
+//    ft.play();
     }
     
     
