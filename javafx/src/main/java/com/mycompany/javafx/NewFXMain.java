@@ -5,6 +5,7 @@
  */
 package com.mycompany.javafx;
 
+import fx.FXMLSceneController;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -13,6 +14,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -24,10 +27,16 @@ public class NewFXMain extends Application {
     
     @Override
     public void start(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/FXMLScene.fxml"));
+        BorderPane root = FXMLLoader.load(getClass().getResource("/fxml/FXMLMenu.fxml"));
         
+        AnchorPane anchor;
+                    //load up OTHER FXML document
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/FXMLScene.fxml"));
+                    anchor = loader.load();
+                    FXMLSceneController controller = loader.getController();
+        root.setCenter(anchor);
         Scene scene = new Scene(root);
-        scene.getStylesheets().add("/styles/Styles.css");
+        scene.getStylesheets().add("/css/fxmlscene.css");
         
         stage.setTitle("JavaFX and Maven");
         stage.setScene(scene);
