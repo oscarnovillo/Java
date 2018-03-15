@@ -43,6 +43,10 @@ public class FXMLejemplo1Controller implements Initializable {
     private void handleLoginAction(ActionEvent event) throws IOException {
         indice++;
         fxCajaTexto.setText(""+clientes.get(indice).getEdad());
+       Cliente c = new Cliente();
+       c.setNombre(fxCajaTexto.getText());
+       c.setEdad(Integer.parseInt(fxCajaTexto.getText()));
+       clientes.add(c);
         
 //        Alert a = new Alert(Alert.AlertType.INFORMATION, mensaje, 
 //          ButtonType.CLOSE);
