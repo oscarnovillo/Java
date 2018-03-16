@@ -31,9 +31,10 @@ public class NewFXMain extends Application {
         
         AnchorPane anchor;
                     //load up OTHER FXML document
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/FXMLScene.fxml"));
-                    anchor = loader.load();
-                    FXMLSceneController controller = loader.getController();
+        FXMLLoader loader = new FXMLLoader(
+          getClass().getResource("/fxml/FXMLScene.fxml"));
+        anchor = loader.load();
+        FXMLSceneController controller = loader.getController();
         root.setCenter(anchor);
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/css/fxmlscene.css");

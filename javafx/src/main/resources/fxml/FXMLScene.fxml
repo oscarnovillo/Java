@@ -5,7 +5,9 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/9" fx:controller="fx.FXMLSceneController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" 
+            xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/9" 
+            fx:controller="fx.FXMLSceneController">
     <stylesheets>
         <URL value="@fxmlscene.css" />
     </stylesheets>
