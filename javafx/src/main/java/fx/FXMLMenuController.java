@@ -25,6 +25,10 @@ import merchadona.servicios.Merchadona;
  */
 public class FXMLMenuController implements Initializable {
 
+    private AnchorPane scene;
+    private AnchorPane scene2;
+    private AnchorPane tabla;
+    
     
     private Merchadona merchadona;
     
