@@ -25,6 +25,8 @@ import javafx.util.Duration;
  */
 public class FXMLSceneController implements Initializable {
 
+    private FXMLMenuController controller;
+    
     @FXML
     private TextField fxUser;
     
@@ -36,6 +38,9 @@ public class FXMLSceneController implements Initializable {
         //final Stage stage = (Stage) fxUser.getScene().getWindow();
         //a.initOwner(stage);
         a.showAndWait();
+
+        this.controller.getFxMenu().setVisible(true);
+        this.controller.getFxProbar().setVisible(false);
         
 //         FadeTransition ft = new FadeTransition(Duration.millis(5000), fxUser);
 //    ft.setFromValue(1.0);
@@ -52,5 +57,9 @@ public class FXMLSceneController implements Initializable {
         // TODO
         
     }    
+
+    public void setController(FXMLMenuController controller) {
+        this.controller = controller;
+    }
     
 }

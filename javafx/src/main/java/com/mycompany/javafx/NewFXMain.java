@@ -5,6 +5,7 @@
  */
 package com.mycompany.javafx;
 
+import fx.FXMLMenuController;
 import fx.FXMLSceneController;
 import java.io.IOException;
 import javafx.application.Application;
@@ -27,7 +28,12 @@ public class NewFXMain extends Application {
     
     @Override
     public void start(Stage stage) throws IOException {
-        BorderPane root = FXMLLoader.load(getClass().getResource("/fxml/FXMLMenu.fxml"));
+        //BorderPane root = FXMLLoader.load(getClass().getResource("/fxml/FXMLMenu.fxml"));
+        FXMLLoader loaderMenu = new FXMLLoader(
+          getClass().getResource("/fxml/FXMLMenu.fxml"));
+        BorderPane root = loaderMenu.load();
+        FXMLMenuController menuController = loaderMenu.getController();   
+               
         
         AnchorPane anchor;
                     //load up OTHER FXML document
@@ -35,6 +41,8 @@ public class NewFXMain extends Application {
           getClass().getResource("/fxml/FXMLScene.fxml"));
         anchor = loader.load();
         FXMLSceneController controller = loader.getController();
+        controller.setController(menuController);
+        
         root.setCenter(anchor);
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/css/fxmlscene.css");

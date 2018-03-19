@@ -12,8 +12,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import merchadona.servicios.Merchadona;
 
 /**
  * FXML Controller class
@@ -21,6 +24,15 @@ import javafx.scene.layout.BorderPane;
  * @author oscar
  */
 public class FXMLMenuController implements Initializable {
+
+    
+    private Merchadona merchadona;
+    
+    @FXML
+    private MenuBar fxMenu;
+
+    @FXML
+    private Menu fxProbar;
 
     @FXML
     private BorderPane fxRoot;
@@ -32,7 +44,8 @@ public class FXMLMenuController implements Initializable {
         FXMLLoader loader = new FXMLLoader(
           getClass().getResource("/fxml/FXMLScene.fxml"));
         anchor = loader.load();
-        //FXMLSceneController controller = loader.getController();
+        FXMLSceneController controller = loader.getController();
+        controller.setController(this);
         fxRoot.setCenter(anchor);
     }
 
@@ -43,7 +56,9 @@ public class FXMLMenuController implements Initializable {
         FXMLLoader loader = new FXMLLoader(
           getClass().getResource("/fxml/FXMLSceneNew.fxml"));
         anchor = loader.load();
-       // FXMLSceneNewController controller = loader.getController();
+        FXMLSceneNewController controller = loader.getController();
+        controller.setController(this);
+
         fxRoot.setCenter(anchor);
     }
 
@@ -53,6 +68,21 @@ public class FXMLMenuController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        fxMenu.setVisible(false);
+        merchadona = new Merchadona();
+
+    }
+
+    public MenuBar getFxMenu() {
+        return fxMenu;
+    }
+
+    public Menu getFxProbar() {
+        return fxProbar;
+    }
+
+    public Merchadona getMerchadona() {
+        return merchadona;
     }
 
 }
