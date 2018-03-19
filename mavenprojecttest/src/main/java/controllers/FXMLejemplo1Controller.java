@@ -33,6 +33,8 @@ public class FXMLejemplo1Controller implements Initializable {
     
     @FXML
     private TextField fxCajaTexto;
+    @FXML
+    private TextField fxCajaTexto1;
     
     @FXML
     private Button fxBotonHola;
