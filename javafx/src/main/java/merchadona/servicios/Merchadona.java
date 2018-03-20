@@ -92,40 +92,17 @@ public class Merchadona {
         return altaOK;
     }
 
-    public void darAltaProducto() {
+    
+    
+    
+    
+    public void darAltaProducto(String nombre,double precio) {
         int opcion;
         boolean comprobar = false;
-        double precio;
-        String nombre;
-        System.out.println("Seleccione el tipo de Producto:");
-        System.out.println("-1. Perecedero");
-        System.out.println("-2. No Perecedero");
-        opcion = sc.nextInt();
-        sc.nextLine();
-        System.out.println("Introduce el Nombre del Producto:");
-        nombre = sc.nextLine();
-        for (int i = 0; i < productos.size(); i++) {
-            if (productos.get(i).getNombre().equalsIgnoreCase(nombre)) {
-                comprobar = true;
-                System.out.println("ya esta creado");
-            }
-        }
-        if (!comprobar) {
-            System.out.println("Introduce el Precio base del Producto:");
-            precio = sc.nextDouble();
-            sc.nextLine();
-            switch (opcion) {
-                case 1:
-                    productos.add(new Perecedero(LocalDateTime.now(), nombre, precio));
-                    break;
-                case 2:
-                    productos.add(new Producto(nombre, precio));
-                    break;
-                default:
-                    System.out.print("OPCION NO VALIDA\n");
-                    break;
-            }
-        }
+       
+        productos.add(new Producto(nombre, precio));
+        
+       
     }
 
     public void darBajaEmpleado() {
@@ -226,4 +203,15 @@ public class Merchadona {
         } while (!salir);
 
     }
+
+    public Map<Integer, Empleado> getEmpleados() {
+        return empleados;
+    }
+
+    public ArrayList<Producto> getProductos() {
+        return productos;
+    }
+    
+    
+    
 }
