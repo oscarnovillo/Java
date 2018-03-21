@@ -19,6 +19,7 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import merchadona.modelo.Empleado;
 import merchadona.servicios.Merchadona;
 
 /**
@@ -34,6 +35,8 @@ public class FXMLMenuController implements Initializable {
     private FXMLTablasController controllerT;
 
     private Merchadona merchadona;
+    private Empleado empleadoActual;
+    private int empleadoID;
 
     @FXML
     private MenuBar fxMenu;
@@ -107,4 +110,25 @@ public class FXMLMenuController implements Initializable {
         return merchadona;
     }
 
+    public Empleado getEmpleadoActual() {
+        return empleadoActual;
+    }
+
+    public void setEmpleadoActual(Empleado empleadoActual) {
+        this.empleadoActual = empleadoActual;
+    }
+
+    public int getEmpleadoID() {
+        return empleadoID;
+    }
+
+    public void setEmpleadoID(int empleadoID) {
+        this.empleadoID = empleadoID;
+    }
+
+    
+    public void habilitaMenuAdmin()
+    {
+        
+    }
 }

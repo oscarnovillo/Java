@@ -39,6 +39,31 @@ public class FXMLSceneController implements Initializable {
         //a.initOwner(stage);
         a.showAndWait();
 
+        // mirar varaib le de login
+        int empleadoID = Integer.parseInt(fxUser.getText());
+        this.controller.getMerchadona().login(empleadoID);
+        
+        
+        this.controller.setEmpleadoID(empleadoID);
+        
+        switch (this.controller.getMerchadona().tipoEmpleado(empleadoID))
+        {
+            case 1:
+                this.controller.habilitaMenuAdmin();
+                break;
+            case 2:
+                
+                break;
+            case 3:
+                break;
+              
+        }
+        
+        
+        this.controller.setEmpleadoActual(
+          this.controller.getMerchadona().login(empleadoID));
+        
+        
         this.controller.getFxMenu().setVisible(true);
         this.controller.getFxProbar().setVisible(false);
         
