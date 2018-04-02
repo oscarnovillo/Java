@@ -15,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableCell;
@@ -110,7 +111,9 @@ public class FXMLTablasController implements Initializable {
                         setStyle("");
                     } else {
                         // Format date.
-                        setText(myDateFormatter.format(item));
+                       setText(myDateFormatter.format(item));
+                      
+                        //setGraphic(new DatePicker());
 
                         // Style all dates in March with a different color.
                         if (getTableRow() != null && getTableRow().getItem() instanceof Perecedero) {
