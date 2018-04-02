@@ -37,12 +37,14 @@ public class Merchadona {
         Producto chocolate = new Producto("Chocolate", 2.34);
         Producto leche = new Perecedero(LocalDateTime.now(), "Leche", 5.2);
         Producto latas = new Producto("Latas", 3.4);
+       
 
         empleados.put(victor.getId_empleado(), victor);
         empleados.put(alvaro.getId_empleado(), alvaro);
         empleados.put(andrea.getId_empleado(), andrea);
+                productos.add(leche);
         productos.add(chocolate);
-        productos.add(leche);
+
         productos.add(latas);
 
     }
