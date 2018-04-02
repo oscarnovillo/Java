@@ -50,6 +50,7 @@ public class NewFXMain extends Application {
         
         stage.setTitle("JavaFX and Maven");
         stage.setScene(scene);
+        stage.getProperties().put("hostServices", this.getHostServices());
         stage.show();
     }
 

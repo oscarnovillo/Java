@@ -11,6 +11,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.HostServices;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +20,7 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 import merchadona.modelo.Empleado;
 import merchadona.servicios.Merchadona;
 
@@ -126,6 +128,11 @@ public class FXMLMenuController implements Initializable {
         this.empleadoID = empleadoID;
     }
 
+    
+    public HostServices getHostServices()
+    {
+        return (HostServices)((Stage) this.fxRoot.getScene().getWindow()).getProperties().get("hostServices");
+    }
     
     public void habilitaMenuAdmin()
     {
