@@ -74,7 +74,7 @@ public class FXMLMenuController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         try {
             // TODO
-            fxMenu.setVisible(true);
+           
             merchadona = new Merchadona();
             FXMLLoader loader = new FXMLLoader(
               getClass().getResource(Constantes.PANTALLA_SCENE));
@@ -97,6 +97,9 @@ public class FXMLMenuController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(FXMLMenuController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+         fxMenu.setVisible(false);
+        fxRoot.setCenter(scene);
 
     }
 
