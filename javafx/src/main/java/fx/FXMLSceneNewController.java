@@ -78,7 +78,7 @@ public class FXMLSceneNewController implements Initializable {
         a.showAndWait();
 
         this.controller.getFxMenu().setVisible(true);
-        this.controller.getFxProbar().setVisible(true);
+
 
 //         
     }

@@ -19,6 +19,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import merchadona.modelo.Empleado;
 
 /**
  * FXML Controller class
@@ -37,39 +38,37 @@ public class FXMLSceneController implements Initializable {
 
     @FXML
     private void handleLoginAction(ActionEvent event) throws IOException {
-       
-        
-        this.controller.getHostServices().showDocument("http://www.marca.es");
 
-        Alert a = new Alert(Alert.AlertType.INFORMATION, "HOLA", ButtonType.CLOSE);
+        //this.controller.getHostServices().showDocument("http://www.marca.es");
+        Alert a = new Alert(Alert.AlertType.ERROR, "El numero no es valido", ButtonType.CLOSE);
         //final Stage stage = (Stage) fxUser.getScene().getWindow();
         //a.initOwner(stage);
-        a.showAndWait();
+        //a.showAndWait();
+        try {
+            // mirar varaib le de login
+            int empleadoID = Integer.parseInt(fxUser.getText());
 
-        // mirar varaib le de login
-        int empleadoID = Integer.parseInt(fxUser.getText());
-        this.controller.getMerchadona().login(empleadoID);
-
-        this.controller.setEmpleadoID(empleadoID);
-
-        switch (this.controller.getMerchadona().tipoEmpleado(empleadoID)) {
-            case 1:
-                this.controller.habilitaMenuAdmin();
+            //Empleado emp = this.controller.getMerchadona().login(empleadoID);
+            switch (this.controller.getMerchadona().tipoEmpleado(empleadoID)) {
+                case 1:
+                    this.controller.habilitaMenuAdmin();
+                    break;
+                case 2:
+                    this.controller.habilitaMenuReponedor();
+                    break;
+                case 3:
+                    this.controller.habilitaMenuCajero();
+                   break;
+                case 0:
+                    a.setContentText("id de usuario no valido");
+                    a.showAndWait();
                 break;
-            case 2:
+            }
 
-                break;
-            case 3:
-                break;
-
+        } catch (Exception e) {
+            a.setContentText("el id no es un número");
+            a.showAndWait();
         }
-
-        this.controller.setEmpleadoActual(
-                this.controller.getMerchadona().login(empleadoID));
-
-        this.controller.getFxMenu().setVisible(true);
-        this.controller.getFxProbar().setVisible(false);
-
 //         FadeTransition ft = new FadeTransition(Duration.millis(5000), fxUser);
 //    ft.setFromValue(1.0);
 //    ft.setToValue(0.0);
@@ -84,9 +83,9 @@ public class FXMLSceneController implements Initializable {
         // TODO
         String path = "http://e00-marca.uecdn.es/assets/multimedia/imagenes/2018/04/01/15225728505778_150x0.jpg";
 
+        Image image
+          = new Image(getClass().getResourceAsStream("/images/image.jpg"));
 
-        Image image = new Image(getClass().getResourceAsStream("/images/image.jpg"));
-        
         fxImage.setImage(image);
 
     }
