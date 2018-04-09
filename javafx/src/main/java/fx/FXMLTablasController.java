@@ -5,11 +5,16 @@
  */
 package fx;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -22,6 +27,8 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import merchadona.modelo.Cajera;
@@ -43,15 +50,32 @@ public class FXMLTablasController implements Initializable {
     @FXML
     private ListView<Producto> fxList;
 
+    
     @FXML
-    private VBox fxVbox;
+    private Label fxLabel;
 
+    @FXML
+    private ImageView fxImage;
+    
     @FXML
     private ListView<Cajera> fxListCajero;
 
     @FXML
     private void clickAddProducto(ActionEvent event) {
-        this.controller.getMerchadona().darAltaProducto("hh", 89);
+        try {
+            this.controller.getMerchadona().darAltaProducto("hh", 89);
+            
+            Image image =
+              new Image(new FileInputStream("C:\\Users\\user\\Documents\\javafx_logo_color_1.jpg"));
+            
+             image =
+              new Image(getClass().getResourceAsStream("/images/javafx_logo_color_1.jpg"));
+new Image("file:C:\\Users\\user\\Documents\\javafx_logo_color_1.jpg");
+            
+            fxImage.setImage(image);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(FXMLTablasController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 
@@ -91,6 +115,10 @@ public class FXMLTablasController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         configTabla();
+        
+        Image image =
+          new Image("https://static.lafm.com.co/wp-content/uploads/20180404055234/Cristiano-Ronaldo-Instafgram-Real-Madrid.jpg");
+        fxImage.setImage(image);
                 
 
     }
@@ -98,37 +126,48 @@ public class FXMLTablasController implements Initializable {
     private void configTabla() {
         fxTabla.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("nombre"));
         fxTabla.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("stock"));
+        
+        
         TableColumn<Producto, LocalDateTime> caduca = new TableColumn<Producto, LocalDateTime>("Caduca");
         caduca.setCellValueFactory(new PropertyValueFactory<>("fecha_reposicion"));
-        caduca.setCellFactory(column -> {
-            return new TableCell<Producto, LocalDateTime>() {
-                @Override
-                protected void updateItem(LocalDateTime item, boolean empty) {
-                    super.updateItem(item, empty);
-                    DateTimeFormatter myDateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-                    if (item == null || empty) {
-                        setText(null);
-                        setStyle("");
-                    } else {
-                        // Format date.
-                       setText(myDateFormatter.format(item));
-                      
-                        //setGraphic(new DatePicker());
+//        caduca.setCellFactory(column -> {
+//            return new TableCell<Producto, LocalDateTime>() {
+//                @Override
+//                protected void updateItem(LocalDateTime item, boolean empty) {
+//                    super.updateItem(item, empty);
+//                    DateTimeFormatter myDateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+//                    if (item == null || empty) {
+//                        setText(null);
+//                        setStyle("");
+//                    } else {
+//                        // Format date.
+//                       setText(myDateFormatter.format(item));
+//                      
+//                        //setGraphic(new DatePicker());
+//
+//                        // Style all dates in March with a different color.
+//                        if (getTableRow() != null && getTableRow().getItem() instanceof Perecedero) {
+//                            setTextFill(Color.CHOCOLATE);
+//                            setStyle("-fx-background-color: yellow");
+//                        } else {
+//                            setTextFill(Color.BLACK);
+//                            setText("no caduca");
+//                            setStyle("-fx-background-color: red");
+//                        }
+//                    }
+//                }
+//            };
+//        });
 
-                        // Style all dates in March with a different color.
-                        if (getTableRow() != null && getTableRow().getItem() instanceof Perecedero) {
-                            setTextFill(Color.CHOCOLATE);
-                            setStyle("-fx-background-color: yellow");
-                        } else {
-                            setTextFill(Color.BLACK);
-                            setText("no caduca");
-                            setStyle("-fx-background-color: red");
-                        }
-                    }
-                }
-            };
-        });
-
+        TableColumn<Producto, Double> precioBase = new TableColumn<Producto, Double>("Precio Base");
+        precioBase.setCellValueFactory(new PropertyValueFactory<>("precio_base"));
+        precioBase.setResizable(false);
+          precioBase.setMinWidth(300);
+           TableColumn<Producto, Double> noexiste = new TableColumn<Producto, Double>("Sin valor");
+        noexiste.setCellValueFactory(new PropertyValueFactory<>("ggggg"));
+     
+           fxTabla.getColumns().add(noexiste);
+        fxTabla.getColumns().add(precioBase);
         fxTabla.getColumns().add(caduca);
 
     }
