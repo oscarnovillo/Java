@@ -44,7 +44,7 @@ public class FXMLMenuController implements Initializable {
     private MenuBar fxMenu;
 
     @FXML
-    private Menu fxProbar;
+    private Menu fxAdmin;
 
     @FXML
     private BorderPane fxRoot;
@@ -52,6 +52,13 @@ public class FXMLMenuController implements Initializable {
     @FXML
     public void handleScene1(ActionEvent event) throws IOException {
 
+        FXMLLoader loader = new FXMLLoader(
+          getClass().getResource(Constantes.PANTALLA_SCENE));
+        AnchorPane scene = loader.load();
+        FXMLSceneController controller = loader.getController();
+        controller.setController(this);
+
+        fxMenu.setVisible(false);
         fxRoot.setCenter(scene);
     }
 
@@ -74,7 +81,7 @@ public class FXMLMenuController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         try {
             // TODO
-            fxMenu.setVisible(true);
+
             merchadona = new Merchadona();
             FXMLLoader loader = new FXMLLoader(
               getClass().getResource(Constantes.PANTALLA_SCENE));
@@ -82,6 +89,7 @@ public class FXMLMenuController implements Initializable {
             FXMLSceneController controller = loader.getController();
             controller.setController(this);
 
+            
             loader = new FXMLLoader(
               getClass().getResource(Constantes.PANTALLA_SCENE_NEW));
             scene2 = loader.load();
@@ -98,15 +106,16 @@ public class FXMLMenuController implements Initializable {
             Logger.getLogger(FXMLMenuController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        fxMenu.setVisible(false);
+        fxRoot.setCenter(scene);
+
     }
 
     public MenuBar getFxMenu() {
         return fxMenu;
     }
 
-    public Menu getFxProbar() {
-        return fxProbar;
-    }
+
 
     public Merchadona getMerchadona() {
         return merchadona;
@@ -128,14 +137,27 @@ public class FXMLMenuController implements Initializable {
         this.empleadoID = empleadoID;
     }
 
-    
-    public HostServices getHostServices()
-    {
-        return (HostServices)((Stage) this.fxRoot.getScene().getWindow()).getProperties().get("hostServices");
+    public HostServices getHostServices() {
+        return (HostServices) ((Stage) this.fxRoot.getScene().getWindow()).getProperties().get("hostServices");
+    }
+
+    public void habilitaMenuAdmin() {
+        fxMenu.setVisible(true);
+        fxAdmin.setVisible(true);
+        
+        fxRoot.setCenter(tabla);
+        controllerT.cargarDatosLista();
+        
+    }
+     public void habilitaMenuReponedor() {
+        fxMenu.setVisible(true);
+        fxAdmin.setVisible(false);
+        fxRoot.setCenter(scene2);       
     }
     
-    public void habilitaMenuAdmin()
-    {
-        
+     public void habilitaMenuCajero() {
+        fxMenu.setVisible(true);
+        fxAdmin.setVisible(false);
+        fxRoot.setCenter(scene2);       
     }
 }

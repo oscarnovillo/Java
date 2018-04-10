@@ -9,18 +9,19 @@
    <top>
       <MenuBar fx:id="fxMenu" BorderPane.alignment="CENTER">
         <menus>
-          <Menu mnemonicParsing="false" text="Cambia escena">
+          <Menu fx:id="fxAdmin" mnemonicParsing="false" text="Admin">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#handleScene1" text="Scene 1" />
                   <MenuItem mnemonicParsing="false" onAction="#handleScene2" text="Scene 2" />
                   <MenuItem mnemonicParsing="false" onAction="#handleSceneTablas" text="Tablas" />
             </items>
           </Menu>
-            <Menu fx:id="fxProbar" mnemonicParsing="false" text="probar">
+            <Menu fx:id="fxLogout" mnemonicParsing="false" text="caca">
               <items>
-                <MenuItem mnemonicParsing="false" text="Action 1" />
+                <MenuItem mnemonicParsing="false" onAction="#handleScene1" text="Logout" />
               </items>
             </Menu>
+             
         </menus>
       </MenuBar>
    </top>
