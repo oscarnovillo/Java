@@ -89,6 +89,7 @@ public class FXMLMenuController implements Initializable {
             FXMLSceneController controller = loader.getController();
             controller.setController(this);
 
+            
             loader = new FXMLLoader(
               getClass().getResource(Constantes.PANTALLA_SCENE_NEW));
             scene2 = loader.load();
