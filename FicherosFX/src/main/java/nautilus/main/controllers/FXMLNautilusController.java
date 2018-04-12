@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 
@@ -33,7 +34,7 @@ public class FXMLNautilusController implements Initializable {
     public void handleMouseClick(MouseEvent event) {
         if (event.getClickCount() > 1) {
             File seleccionado
-              = fxFiles.getSelectionModel().getSelectedItem();
+                    = fxFiles.getSelectionModel().getSelectedItem();
 
             fxRutaActual.setText(seleccionado.getAbsolutePath());
             cargarFiles();
@@ -52,7 +53,7 @@ public class FXMLNautilusController implements Initializable {
     public void handleEntrar(ActionEvent event) {
 
         File seleccionado
-          = fxFiles.getSelectionModel().getSelectedItem();
+                = fxFiles.getSelectionModel().getSelectedItem();
 
         fxRutaActual.setText(seleccionado.getAbsolutePath());
         cargarFiles();
@@ -66,6 +67,23 @@ public class FXMLNautilusController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         rutaActual = "c:\\";
         fxRutaActual.setText(rutaActual);
+        fxFiles.setCellFactory(list -> new ListCell<File>() {
+
+            @Override
+            protected void updateItem(File item, boolean empty) {
+                super.updateItem(item, empty);
+                if (item != null) {
+                    setText(item.getName());
+                    if (item.isDirectory()) {
+                        setStyle("-fx-text-fill:red;");
+                    }
+                    else
+                    {
+                        setStyle("-fx-text-fill:black;");
+                    }
+                }
+            }
+        });
         cargarFiles();
 
         // TODO
