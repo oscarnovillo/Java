@@ -5,8 +5,15 @@
  */
 package nautilus.main.controllers;
 
+import com.qoppa.pdf.PDFException;
+import com.qoppa.pdf.source.PDFSource;
+import com.qoppa.pdfViewerFX.PDFViewer;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
@@ -19,13 +26,15 @@ public class FXMLViewPdfController implements Initializable {
 
     
     @FXML
-    //private PdfViewer fxPdfViewer
+    private PDFViewer fxPdfViewer;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        // fxPdfViewer.loadPDF(new FileInputStream("Entrega2.3.pdf"));
+
     }    
     
 }

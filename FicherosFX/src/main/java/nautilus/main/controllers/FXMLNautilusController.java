@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 
 /**
  * FXML Controller class
@@ -25,28 +26,37 @@ public class FXMLNautilusController implements Initializable {
     private ListView<File> fxFiles;
     @FXML
     private Label fxRutaActual;
-    
-    private String rutaActual ;
-    
-    
-    @FXML
-    public void handleSubir(ActionEvent event){
 
-    fxRutaActual.setText(fxRutaActual.getText()+"\\..");
-        cargarFiles();
-    
-    }
-  
-    
+    private String rutaActual;
+
     @FXML
-    public void handleEntrar(ActionEvent event){
-    
-        File seleccionado = 
-          fxFiles.getSelectionModel().getSelectedItem();
+    public void handleMouseClick(MouseEvent event) {
+        if (event.getClickCount() > 1) {
+            File seleccionado
+              = fxFiles.getSelectionModel().getSelectedItem();
+
+            fxRutaActual.setText(seleccionado.getAbsolutePath());
+            cargarFiles();
+        }
+    }
+
+    @FXML
+    public void handleSubir(ActionEvent event) {
+
+        fxRutaActual.setText(fxRutaActual.getText() + "\\..");
+        cargarFiles();
+
+    }
+
+    @FXML
+    public void handleEntrar(ActionEvent event) {
+
+        File seleccionado
+          = fxFiles.getSelectionModel().getSelectedItem();
 
         fxRutaActual.setText(seleccionado.getAbsolutePath());
         cargarFiles();
-    
+
     }
 
     /**
@@ -57,14 +67,13 @@ public class FXMLNautilusController implements Initializable {
         rutaActual = "c:\\";
         fxRutaActual.setText(rutaActual);
         cargarFiles();
-        
+
         // TODO
-    }    
-    
-    private void cargarFiles()
-    {
-       File f = new File(fxRutaActual.getText());
+    }
+
+    private void cargarFiles() {
+        File f = new File(fxRutaActual.getText());
         fxFiles.getItems().clear();
-        fxFiles.getItems().addAll(f.listFiles()); 
+        fxFiles.getItems().addAll(f.listFiles());
     }
 }
