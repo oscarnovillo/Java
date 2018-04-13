@@ -32,8 +32,14 @@ public class FXMLViewPdfController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        // fxPdfViewer.loadPDF(new FileInputStream("Entrega2.3.pdf"));
+        try {
+            // TODO
+            fxPdfViewer.loadPDF(new FileInputStream("Entrega2.3.pdf"));
+        } catch (PDFException ex) {
+            Logger.getLogger(FXMLViewPdfController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(FXMLViewPdfController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }    
     

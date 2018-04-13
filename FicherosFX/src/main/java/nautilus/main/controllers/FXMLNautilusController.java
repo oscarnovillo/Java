@@ -6,11 +6,15 @@
 package nautilus.main.controllers;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,7 +23,10 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import sun.tools.jar.resources.jar;
 
 /**
  * FXML Controller class
@@ -29,7 +36,7 @@ import javafx.scene.input.MouseEvent;
 public class FXMLNautilusController implements Initializable {
 
     @FXML
-    private ListView<File> fxFiles;
+    private ListView<Path> fxFiles;
     @FXML
     private Label fxRutaActual;
 
@@ -39,19 +46,17 @@ public class FXMLNautilusController implements Initializable {
     public void handleMouseClick(MouseEvent event) {
         if (event.getClickCount() > 1) {
             File seleccionado
-                    = fxFiles.getSelectionModel().getSelectedItem();
+                    = fxFiles.getSelectionModel().getSelectedItem().toFile();
             boolean b = Files.isReadable(Paths.get(seleccionado.getAbsolutePath()));
-            if (b){
-            fxRutaActual.setText(seleccionado.getAbsolutePath());
-            cargarFiles();
-            }
-            else
-            {
+            if (b) {
+                fxRutaActual.setText(seleccionado.getAbsolutePath());
+                cargarFiles();
+            } else {
                 Alert a = new Alert(Alert.AlertType.ERROR, "No puedes leer este directorio", ButtonType.CLOSE);
                 a.showAndWait();
             }
         }
-        
+
     }
 
     @FXML
@@ -68,7 +73,7 @@ public class FXMLNautilusController implements Initializable {
     public void handleEntrar(ActionEvent event) {
 
         File seleccionado
-                = fxFiles.getSelectionModel().getSelectedItem();
+                = fxFiles.getSelectionModel().getSelectedItem().toFile();
 
         fxRutaActual.setText(seleccionado.getAbsolutePath());
         cargarFiles();
@@ -82,27 +87,25 @@ public class FXMLNautilusController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         rutaActual = "c:\\";
         fxRutaActual.setText(rutaActual);
-        fxFiles.setCellFactory(list -> new ListCell<File>() {
+        fxFiles.setCellFactory(list -> new ListCell<Path>() {
 
             @Override
-            protected void updateItem(File item, boolean empty) {
+            protected void updateItem(Path item, boolean empty) {
                 super.updateItem(item, empty);
                 if (item != null) {
-                    setText(item.getName());
-                    if (item.isDirectory()) {
-                        setStyle("-fx-text-fill:red;-fx-background-color:yellow");
-                        
-                    }
-                    else
-                    {
-                        
+                    setText(item.getFileName().toString());
+                    if (item.toFile().isDirectory()) {
+                        setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/images/folder.png"))));
+                        setStyle("-fx-text-fill:red;");
+
+                    } else {
+                        setGraphic(null);
                         setStyle("-fx-text-fill:black;");
                     }
-                }
-                else
-                {
-                   setText("");  
-                   setStyle("-fx-text-fill:black;-fx-background-color:white");
+                } else {
+                    setText("");
+                    setGraphic(null);
+                    setStyle("-fx-text-fill:black;-fx-background-color:white");
                 }
             }
         });
@@ -112,8 +115,13 @@ public class FXMLNautilusController implements Initializable {
     }
 
     private void cargarFiles() {
-        File f = new File(fxRutaActual.getText());
-        fxFiles.getItems().clear();
-        fxFiles.getItems().addAll(f.listFiles());
+        try {
+            File f = new File(fxRutaActual.getText());
+            fxFiles.getItems().clear();
+            
+            fxFiles.getItems().addAll(Files.list(Paths.get(fxRutaActual.getText())).collect(Collectors.toList()));
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLNautilusController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
