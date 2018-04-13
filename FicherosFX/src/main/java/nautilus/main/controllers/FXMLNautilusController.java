@@ -7,10 +7,15 @@ package nautilus.main.controllers;
 
 import java.io.File;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -35,9 +40,16 @@ public class FXMLNautilusController implements Initializable {
         if (event.getClickCount() > 1) {
             File seleccionado
                     = fxFiles.getSelectionModel().getSelectedItem();
-
+            boolean b = Files.isReadable(Paths.get(seleccionado.getAbsolutePath()));
+            if (b){
             fxRutaActual.setText(seleccionado.getAbsolutePath());
             cargarFiles();
+            }
+            else
+            {
+                Alert a = new Alert(Alert.AlertType.ERROR, "No puedes leer este directorio", ButtonType.CLOSE);
+                a.showAndWait();
+            }
         }
         
     }
