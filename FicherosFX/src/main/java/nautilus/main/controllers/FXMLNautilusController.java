@@ -99,6 +99,11 @@ public class FXMLNautilusController implements Initializable {
                         setStyle("-fx-text-fill:black;");
                     }
                 }
+                else
+                {
+                   setText("");  
+                   setStyle("-fx-text-fill:black;-fx-background-color:white");
+                }
             }
         });
         cargarFiles();
