@@ -39,12 +39,15 @@ public class FXMLNautilusController implements Initializable {
             fxRutaActual.setText(seleccionado.getAbsolutePath());
             cargarFiles();
         }
+        
     }
 
     @FXML
     public void handleSubir(ActionEvent event) {
 
-        fxRutaActual.setText(fxRutaActual.getText() + "\\..");
+        File actual = new File(fxRutaActual.getText());
+
+        fxRutaActual.setText(actual.getParent());
         cargarFiles();
 
     }
@@ -75,10 +78,12 @@ public class FXMLNautilusController implements Initializable {
                 if (item != null) {
                     setText(item.getName());
                     if (item.isDirectory()) {
-                        setStyle("-fx-text-fill:red;");
+                        setStyle("-fx-text-fill:red;-fx-background-color:yellow");
+                        
                     }
                     else
                     {
+                        
                         setStyle("-fx-text-fill:black;");
                     }
                 }
