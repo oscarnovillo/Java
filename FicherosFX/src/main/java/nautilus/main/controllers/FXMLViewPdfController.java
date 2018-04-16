@@ -5,9 +5,9 @@
  */
 package nautilus.main.controllers;
 
-import com.qoppa.pdf.PDFException;
-import com.qoppa.pdf.source.PDFSource;
-import com.qoppa.pdfViewerFX.PDFViewer;
+//import com.qoppa.pdf.PDFException;
+//import com.qoppa.pdf.source.PDFSource;
+//import com.qoppa.pdfViewerFX.PDFViewer;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -40,23 +40,21 @@ public class FXMLViewPdfController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        try {
-            //        OpenViewerFX viewer;
-//        viewer = new OpenViewerFX(fxRoot,null);
-//        viewer.setupViewer();
-//        BaseViewerFX base = new BaseViewerFX();
-//
-//        viewer.executeCommand(Commands.OPENFILE,new Object[]{new File("Entrega2.3.pdf")});
-//        fxPdfViewer.setVisible(false);
-// TODO
-            fxPdfViewer.loadPDF(new FileInputStream("Entrega2.3.pdf"));
-          
-            fxPdfViewer.getToolBar().getOpenDoc().setVisible(false);
-        } catch (PDFException ex) {
-            Logger.getLogger(FXMLViewPdfController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(FXMLViewPdfController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            //        OpenViewerFX viewer;
+////        viewer = new OpenViewerFX(fxRoot,null);
+////        viewer.setupViewer();
+////        BaseViewerFX base = new BaseViewerFX();
+////
+////        viewer.executeCommand(Commands.OPENFILE,new Object[]{new File("Entrega2.3.pdf")});
+////        fxPdfViewer.setVisible(false);
+//// TODO
+//            fxPdfViewer.loadPDF(new FileInputStream("Entrega2.3.pdf"));
+//          
+//            fxPdfViewer.getToolBar().getOpenDoc().setVisible(false);
+//        } catch (PDFException ex) {
+//            Logger.getLogger(FXMLViewPdfController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
 
     }
 
