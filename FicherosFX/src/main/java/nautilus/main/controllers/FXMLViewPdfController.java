@@ -33,7 +33,7 @@ public class FXMLViewPdfController implements Initializable {
     AnchorPane fxRoot;
 
     @FXML
-    private PDFViewer fxPdfViewer;
+   // private PDFViewer fxPdfViewer;
 
     /**
      * Initializes the controller class.
