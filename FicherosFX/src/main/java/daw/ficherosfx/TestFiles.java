@@ -31,19 +31,25 @@ public class TestFiles {
             Files.touch(f);
             String s ="hola";
          
-            //Files.asCharSink(f, Charset.forName("UTF-8")).write("hola");
+            //escribir en un fichero
+            Files.asCharSink(f, Charset.forName("UTF-8")).write("hola");
             
-            //FileReader fr = new FileReader("test.test");
-            
+             
+            // escribir al final de un fichero
             Files.asByteSink(f,FileWriteMode.APPEND).write("hola".getBytes("UTF-8"));
             
-            //fr.close();
+           
+            //leer un fichero
             System.out.println(CharStreams.toString(new FileReader("test.test")));
             System.out.println(Files.asCharSource(f, Charset.defaultCharset()).read());
+            
+            
             
             byte[] bytes = new byte[100];
             bytes = Files.asByteSource(f).read();
             System.out.println(new String(bytes));
+            
+            
             
             
             
