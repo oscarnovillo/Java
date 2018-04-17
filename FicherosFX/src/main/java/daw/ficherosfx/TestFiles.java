@@ -34,24 +34,25 @@ public class TestFiles {
             //escribir en un fichero
             Files.asCharSink(f, Charset.forName("UTF-8")).write("hola");
             
-             
             // escribir al final de un fichero
             Files.asByteSink(f,FileWriteMode.APPEND).write("hola".getBytes("UTF-8"));
             
-           
+
             //leer un fichero
             System.out.println(CharStreams.toString(new FileReader("test.test")));
             System.out.println(Files.asCharSource(f, Charset.defaultCharset()).read());
+
+            Files.copy(new File("test.test"),new File("test.test.copia"));
             
+            File delete = new File("test.test");
+            delete.delete();
             
+            File rename = new File("test.test.copia");
+            rename.renameTo(new File("test.test.copia2"));
             
             byte[] bytes = new byte[100];
             bytes = Files.asByteSource(f).read();
             System.out.println(new String(bytes));
-            
-            
-            
-            
             
             
         } catch (IOException ex) {
