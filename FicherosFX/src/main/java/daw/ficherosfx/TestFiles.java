@@ -5,15 +5,16 @@
  */
 package daw.ficherosfx;
 
+import com.google.common.io.CharSink;
 import com.google.common.io.CharStreams;
 import com.google.common.io.FileWriteMode;
 import com.google.common.io.Files;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.Charset;
 
-import java.nio.file.Path;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -32,7 +33,10 @@ public class TestFiles {
             String s ="hola";
          
             //escribir en un fichero
-            Files.asCharSink(f, Charset.forName("UTF-8")).write("hola");
+            CharSink sink = Files.asCharSink(f, Charset.forName("UTF-8"));
+            
+            sink.write("hola");
+            
             
             // escribir al final de un fichero
             Files.asByteSink(f,FileWriteMode.APPEND).write("hola".getBytes("UTF-8"));
@@ -50,6 +54,7 @@ public class TestFiles {
             File rename = new File("test.test.copia");
             rename.renameTo(new File("test.test.copia2"));
             
+            //leer gichero binario
             byte[] bytes = new byte[100];
             bytes = Files.asByteSource(f).read();
             System.out.println(new String(bytes));
