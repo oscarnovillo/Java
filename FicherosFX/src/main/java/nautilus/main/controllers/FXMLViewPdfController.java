@@ -43,14 +43,7 @@ public class FXMLViewPdfController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            //        OpenViewerFX viewer;
-//        viewer = new OpenViewerFX(fxRoot,null);
-//        viewer.setupViewer();
-//        BaseViewerFX base = new BaseViewerFX();
-//
-//        viewer.executeCommand(Commands.OPENFILE,new Object[]{new File("Entrega2.3.pdf")});
-//        fxPdfViewer.setVisible(false);
-// TODO
+
             fxPdfViewer.loadPDF(new FileInputStream("Entrega2.3.pdf"));
           
             fxPdfViewer.getToolBar().getOpenDoc().setVisible(false);
