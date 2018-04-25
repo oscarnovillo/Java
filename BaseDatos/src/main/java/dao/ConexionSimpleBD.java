@@ -34,7 +34,7 @@ public class ConexionSimpleBD {
         ResultSet rs = null;
         try {
             Class.forName(Configuration.getInstance().getDriverDB());
-            Connection connection;
+            
 
             con = DriverManager.getConnection(
                     Configuration.getInstance().getUrlDB(),
@@ -43,7 +43,8 @@ public class ConexionSimpleBD {
 
             stmt = con.createStatement();
             String sql;
-            sql = "SELECT * FROM ALUMNOS";
+            
+            sql = "SELECT * FROM alumnos";
             rs = stmt.executeQuery(sql);
 
             //STEP 5: Extract data from result set
@@ -71,20 +72,25 @@ public class ConexionSimpleBD {
                 if (stmt != null) {
                     stmt.close();
                 }
-            } catch (SQLException ex) {
-                Logger.getLogger(AlumnosDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            try {
                 if (con != null) {
                     con.close();
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(ConexionSimpleBD.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(AlumnosDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
+
         }
         return lista;
 
+    }
+    
+    public Alumno getAlumnoJDBC(String id)
+      
+    {
+      
+        
+        
+        
     }
 
 }
