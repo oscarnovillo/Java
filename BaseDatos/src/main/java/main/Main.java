@@ -14,17 +14,17 @@ import model.Alumno;
  * @author user
  */
 public class Main {
-    
+
     public static void main(String[] args) {
-     ConexionSimpleBD c = new    ConexionSimpleBD();
-     
-     
-     List<Alumno> alumnos = c.getAllAlumnosJDBC();
-     for (Alumno a : alumnos)
-       {
-           System.out.println(a.getNombre());
-           System.out.println(a.getId());
-       }
+        ConexionSimpleBD c = new ConexionSimpleBD();
+
+        List<Alumno> alumnos = c.getAllAlumnosJDBC();
+        for (Alumno a : alumnos) {
+            System.out.println(a.getNombre());
+            System.out.println(a.getId());
+        }
+        Alumno a = c.getAlumnoJDBC("403");
+        System.out.println(a.getNombre());
     }
-    
+
 }
