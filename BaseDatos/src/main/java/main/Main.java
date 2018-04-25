@@ -23,7 +23,7 @@ public class Main {
             System.out.println(a.getNombre());
             System.out.println(a.getId());
         }
-        Alumno a = c.getAlumnoJDBC("403");
+        Alumno a = c.getAlumnoJDBC(403);
         System.out.println(a.getNombre());
     }
 

@@ -8,6 +8,7 @@ package dao;
 import config.Configuration;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -34,16 +35,15 @@ public class ConexionSimpleBD {
         ResultSet rs = null;
         try {
             Class.forName(Configuration.getInstance().getDriverDB());
-            
 
             con = DriverManager.getConnection(
-                    Configuration.getInstance().getUrlDB(),
-                    Configuration.getInstance().getUserDB(),
-                    Configuration.getInstance().getPassDB());
+              Configuration.getInstance().getUrlDB(),
+              Configuration.getInstance().getUserDB(),
+              Configuration.getInstance().getPassDB());
 
             stmt = con.createStatement();
             String sql;
-            
+
             sql = "SELECT * FROM alumnos";
             rs = stmt.executeQuery(sql);
 
@@ -83,14 +83,62 @@ public class ConexionSimpleBD {
         return lista;
 
     }
-    
-    public Alumno getAlumnoJDBC(String id)
-      
-    {
-      
-        
-        
-        
+
+    public Alumno getAlumnoJDBC(int idWhere) {
+
+        Alumno nuevo = null;
+
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+            Class.forName(Configuration.getInstance().getDriverDB());
+
+            con = DriverManager.getConnection(
+              Configuration.getInstance().getUrlDB(),
+              Configuration.getInstance().getUserDB(),
+              Configuration.getInstance().getPassDB());
+
+            stmt = con.prepareStatement("SELECT * FROM alumnos where id=? AND nombre LIKE ?");
+
+            stmt.setInt(1, idWhere);
+            stmt.setString(2, "%a%");
+
+            rs = stmt.executeQuery();
+
+            //STEP 5: Extract data from result set
+            rs.next();
+            //Retrieve by column name
+            int id = rs.getInt("id");
+            String nombre = rs.getString("nombre");
+            Date fn = rs.getDate("fecha_nacimiento");
+            Boolean mayor = rs.getBoolean("mayor_edad");
+            nuevo = new Alumno();
+            nuevo.setFecha_nacimiento(fn);
+            nuevo.setId(id);
+            nuevo.setMayor_edad(mayor);
+            nuevo.setNombre(nombre);
+
+        } catch (Exception ex) {
+            Logger.getLogger(AlumnosDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(AlumnosDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+        return nuevo;
+
     }
 
 }
