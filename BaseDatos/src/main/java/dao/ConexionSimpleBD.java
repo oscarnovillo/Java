@@ -140,5 +140,57 @@ public class ConexionSimpleBD {
         return nuevo;
 
     }
+    
+    public int updateAlumnoJDBC(Alumno a) {
+        Connection con = null;
+        PreparedStatement stmt = null;
+       int filas = -1;
+        try {
+            Class.forName(Configuration.getInstance().getDriverDB());
+
+            con = DriverManager.getConnection(
+              Configuration.getInstance().getUrlDB(),
+              Configuration.getInstance().getUserDB(),
+              Configuration.getInstance().getPassDB());
+
+            stmt = con.prepareStatement("UPDATE alumnos "
+              + "SET NOMBRE=?,FECHA_NACIMIENTO=?,MAYOR_EDAD=? "
+              + "WHERE id=?");
+
+            stmt.setString(1, a.getNombre());
+          
+            stmt.setDate(2, 
+              new java.sql.Date(a.getFecha_nacimiento().getTime()));
+            
+            stmt.setBoolean(3, a.getMayor_edad());
+            
+            stmt.setInt(4,a.getId());
+            
+            filas = stmt.executeUpdate();
+            
+
+            
+
+        } catch (Exception ex) {
+            Logger.getLogger(AlumnosDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(AlumnosDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+        return filas;
+
+    }
+    
+
 
 }
