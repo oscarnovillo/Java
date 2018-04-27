@@ -99,10 +99,10 @@ public class ConexionSimpleBD {
               Configuration.getInstance().getUserDB(),
               Configuration.getInstance().getPassDB());
 
-            stmt = con.prepareStatement("SELECT * FROM alumnos where id=? AND nombre LIKE ?");
+            stmt = con.prepareStatement("SELECT * FROM alumnos where id=? ");
 
             stmt.setInt(1, idWhere);
-            stmt.setString(2, "%a%");
+
 
             rs = stmt.executeQuery();
 
@@ -140,11 +140,11 @@ public class ConexionSimpleBD {
         return nuevo;
 
     }
-    
+
     public int updateAlumnoJDBC(Alumno a) {
         Connection con = null;
         PreparedStatement stmt = null;
-       int filas = -1;
+        int filas = -1;
         try {
             Class.forName(Configuration.getInstance().getDriverDB());
 
@@ -158,18 +158,15 @@ public class ConexionSimpleBD {
               + "WHERE id=?");
 
             stmt.setString(1, a.getNombre());
-          
-            stmt.setDate(2, 
-              new java.sql.Date(a.getFecha_nacimiento().getTime()));
-            
-            stmt.setBoolean(3, a.getMayor_edad());
-            
-            stmt.setInt(4,a.getId());
-            
-            filas = stmt.executeUpdate();
-            
 
-            
+            stmt.setDate(2,
+              new java.sql.Date(a.getFecha_nacimiento().getTime()));
+
+            stmt.setBoolean(3, a.getMayor_edad());
+
+            stmt.setInt(4, a.getId());
+
+            filas = stmt.executeUpdate();
 
         } catch (Exception ex) {
             Logger.getLogger(AlumnosDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -190,7 +187,58 @@ public class ConexionSimpleBD {
         return filas;
 
     }
-    
 
+    public int insertAlumnoJDBC(Alumno a) {
+        Connection con = null;
+        PreparedStatement stmt = null;
+        int filas = -1;
+        try {
+            Class.forName(Configuration.getInstance().getDriverDB());
+
+            con = DriverManager.getConnection(
+              Configuration.getInstance().getUrlDB(),
+              Configuration.getInstance().getUserDB(),
+              Configuration.getInstance().getPassDB());
+
+            stmt = con.prepareStatement("INSERT INTO alumnos "
+              + "(NOMBRE,FECHA_NACIMIENTO,MAYOR_EDAD)  "
+              + "VALUES (?,?,?)", Statement.RETURN_GENERATED_KEYS);
+
+            stmt.setString(1, a.getNombre());
+
+            stmt.setDate(2,
+              new java.sql.Date(a.getFecha_nacimiento().getTime()));
+
+            stmt.setBoolean(3, a.getMayor_edad());
+
+            
+
+            filas = stmt.executeUpdate();
+            
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()) {
+                a.setId(rs.getInt(1));
+            }
+            
+            
+        } catch (Exception ex) {
+            Logger.getLogger(AlumnosDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(AlumnosDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+        return filas;
+
+    }
 
 }
