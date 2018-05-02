@@ -24,7 +24,11 @@ public class Main {
             System.out.println(a.getId());
         }
         Alumno a = c.getAlumnoJDBC(403);
+        a.setNombre("Salah");
+        c.updateAlumnoJDBC(a);
         System.out.println(a.getNombre());
+        a = c.getAlumnoJDBC(403);
+        System.out.println("despues "+a.getNombre());
     }
 
 }
