@@ -9,7 +9,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.animation.FadeTransition;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -58,11 +61,11 @@ public class FXMLSceneController implements Initializable {
                     break;
                 case 3:
                     this.controller.habilitaMenuCajero();
-                   break;
+                    break;
                 case 0:
                     a.setContentText("id de usuario no valido");
                     a.showAndWait();
-                break;
+                    break;
             }
 
         } catch (Exception e) {
@@ -84,9 +87,29 @@ public class FXMLSceneController implements Initializable {
         String path = "http://e00-marca.uecdn.es/assets/multimedia/imagenes/2018/04/01/15225728505778_150x0.jpg";
 
         Image image
-          = new Image(getClass().getResourceAsStream("/images/image.jpg"));
+                = new Image(getClass().getResourceAsStream("/images/image.jpg"));
 
         fxImage.setImage(image);
+
+        Timeline fiveSecondsWonder = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                
+                int seg=0;
+                try{
+                        seg = Integer.parseInt(fxUser.getText());
+                }
+                catch(Exception e)
+                {
+                    seg = 0;
+                }
+                seg++;
+                fxUser.setText(seg+"");
+            }
+        }));
+        fiveSecondsWonder.setCycleCount(Timeline.INDEFINITE);
+        fiveSecondsWonder.play();
 
     }
 
