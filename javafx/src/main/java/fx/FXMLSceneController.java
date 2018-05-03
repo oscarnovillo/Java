@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.HostServices;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -43,8 +44,13 @@ public class FXMLSceneController implements Initializable {
     private void handleLoginAction(ActionEvent event) throws IOException {
 
         //this.controller.getHostServices().showDocument("http://www.marca.es");
+        HostServices hs = (HostServices)((Stage)fxImage.getParent().getScene().getWindow()).getProperties().get("hostServices");
+
+        hs.showDocument("http://www.marca.es");
+        
         Alert a = new Alert(Alert.AlertType.ERROR, "El numero no es valido", ButtonType.CLOSE);
         //final Stage stage = (Stage) fxUser.getScene().getWindow();
+        
         //a.initOwner(stage);
         //a.showAndWait();
         try {
@@ -91,6 +97,7 @@ public class FXMLSceneController implements Initializable {
 
         fxImage.setImage(image);
 
+       
         Timeline fiveSecondsWonder = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
 
             @Override
