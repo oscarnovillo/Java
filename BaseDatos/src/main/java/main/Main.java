@@ -29,6 +29,8 @@ public class Main {
         System.out.println(a.getNombre());
         a = c.getAlumnoJDBC(403);
         System.out.println("despues "+a.getNombre());
+        System.out.println("fila insertadas "+c.insertAlumnoJDBC(a));
+        System.out.println(a.getId());
     }
 
 }

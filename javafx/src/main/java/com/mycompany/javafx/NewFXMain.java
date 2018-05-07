@@ -34,6 +34,7 @@ public class NewFXMain extends Application {
           getClass().getResource(Constantes.PANTALLA_MENU));
         BorderPane root = loaderMenu.load();
         FXMLMenuController menuController = loaderMenu.getController();   
+        
 
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/css/fxmlscene.css");
