@@ -219,8 +219,6 @@ public class ConexionSimpleBD {
             if (rs.next()) {
                 a.setId(rs.getInt(1));
             }
-            
-            
         } catch (Exception ex) {
             Logger.getLogger(AlumnosDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
