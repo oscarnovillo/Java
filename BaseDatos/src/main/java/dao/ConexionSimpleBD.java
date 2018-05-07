@@ -211,7 +211,7 @@ public class ConexionSimpleBD {
 
             stmt.setBoolean(3, a.getMayor_edad());
 
-            
+           
 
             filas = stmt.executeUpdate();
             
