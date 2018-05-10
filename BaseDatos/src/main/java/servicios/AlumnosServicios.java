@@ -20,20 +20,20 @@ public class AlumnosServicios {
     {
         AlumnosDAO dao = new AlumnosDAO();
         
-        return dao.getAllAlumnosJDBCTemplate();
+        return null;
     }
     
     public Alumno getAlumnoById(int id){
         AlumnosDAO dao = new AlumnosDAO();
         
-        return dao.getUserById(id);
+        return null;
         
     }
     public Alumno addAlumno(Alumno alumnoNuevo)
     {
         AlumnosDAO dao = new AlumnosDAO();
         
-        return dao.addUserSimpleJDBCTemplate(alumnoNuevo);
+        return null;
     }
     
 }

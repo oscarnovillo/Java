@@ -11,6 +11,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
@@ -84,6 +85,8 @@ public class ConexionSimpleBD {
 
     }
 
+    
+    
     public Alumno getAlumnoJDBC(int idWhere) {
 
         Alumno nuevo = null;
@@ -168,7 +171,10 @@ public class ConexionSimpleBD {
 
             filas = stmt.executeUpdate();
 
-        } catch (Exception ex) {
+        } catch (SQLIntegrityConstraintViolationException ex) {
+            Logger.getLogger(AlumnosDAO.class.getName()).log(Level.SEVERE, null, ex);
+            filas = -1;
+        }catch (Exception ex) {
             Logger.getLogger(AlumnosDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
@@ -238,5 +244,41 @@ public class ConexionSimpleBD {
         return filas;
 
     }
+    
+      public int delUser2(Alumno a){
+        DBConnection db = new DBConnection();
+        Connection con = null;
+        int filas = 0;
+        try {
+            
+            con = db.getConnection();
+            con.setAutoCommit(false);
+            String sql = "DELETE FROM NOTAS WHERE ID_ALUMNO = ?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setLong(1, a.getId());
+            
+            filas += stmt.executeUpdate();
+            
+            sql = "DELETE FROM ALUMNOS WHERE ID = ?";
+            stmt = con.prepareStatement(sql);
+            stmt.setLong(1, a.getId());
+
+            filas += stmt.executeUpdate();
+            con.commit();
+            
+        } catch (Exception ex) {
+            Logger.getLogger(AlumnosDAO.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                if (con!=null)
+                    con.rollback();
+            } catch (SQLException ex1) {
+                Logger.getLogger(AlumnosDAO.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        } finally {
+            db.cerrarConexion(con);
+        }
+        return filas;
+    }
+
 
 }
