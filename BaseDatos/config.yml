@@ -1,7 +1,9 @@
 ## YAML Template.
 ---
-driverDB: com.mysql.jdbc.Driver
-urlDB: jdbc:mysql://db4free.net:3307/clasesdaw?useSSL=false
+#driverDB: com.mysql.jdbc.Driver
+#urlDB: jdbc:mysql://db4free.net:3307/clasesdaw?useSSL=false
+driverDB: org.hsqldb.jdbc.JDBCDriver
+urlDB: jdbc:hsqldb:mem:instituto
 userDB: oscarnovillo
 passDB: c557ef
 mailFrom: alumno1@iesquevedo.es
