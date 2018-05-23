@@ -148,5 +148,74 @@ public class AlumnosDAO {
         return alumno;
 
     }
+    
+    
+    
+    public List<Alumno> getAllAlumnosJDBCTemplate() {
+
+        JdbcTemplate jtm = new JdbcTemplate(
+          DBConnection.getInstance().getDataSource());
+        List<Alumno> alumnos = jtm.query("Select * from ALUMNOS WHERE ID = ?",
+          new BeanPropertyRowMapper(Alumno.class),1);
+
+        return alumnos;
+    }
+
+    public int updateJDBCTemplate(Alumno a) {
+
+        JdbcTemplate jtm = new JdbcTemplate(
+          DBConnection.getInstance().getDataSource());
+        String updateQuery = "update ALUMNOS set NOMBRE = ? where id = ?";
+        int filas = jtm.update(updateQuery, a.getId(), a.getNombre());
+       
+
+        return filas;
+    }
+
+    //insert spring jdbc template
+    public Alumno addUserSimpleJDBCTemplate(Alumno a) {
+
+        TransactionDefinition txDef = new DefaultTransactionDefinition();
+        DataSourceTransactionManager transactionManager = new DataSourceTransactionManager(DBConnection.getInstance().getDataSource());
+        TransactionStatus txStatus = transactionManager.getTransaction(txDef);
+
+        try {
+
+            SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(transactionManager.getDataSource())
+              .withTableName("ALUMNOS")
+              .usingGeneratedKeyColumns("ID");
+            Map<String, Object> parameters = new HashMap<String, Object>();
+
+            parameters.put("NOMBRE", a.getNombre());
+            parameters.put("FECHA_NACIMIENTO", a.getFecha_nacimiento());
+            parameters.put("MAYOR_EDAD", a.getMayor_edad());
+            a.setId(jdbcInsert.executeAndReturnKey(parameters).longValue());
+            transactionManager.commit(txStatus);
+
+        } catch (Exception e) {
+
+            transactionManager.rollback(txStatus);
+
+            throw e;
+
+        }
+
+        return a;
+    }
+
+    //insert spring jdbc template
+    public Alumno addUserJDBCTemplate(Alumno a) {
+
+        SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(
+          DBConnection.getInstance().getDataSource()).withTableName("ALUMNOS").usingGeneratedKeyColumns("ID");
+        Map<String, Object> parameters = new HashMap<String, Object>();
+
+        parameters.put("NOMBRE", a.getNombre());
+        parameters.put("FECHA_NACIMIENTO", a.getFecha_nacimiento());
+        parameters.put("MAYOR_EDAD", a.getMayor_edad());
+        a.setId(jdbcInsert.executeAndReturnKey(parameters).longValue());
+        return a;
+    }
+
 
 }
