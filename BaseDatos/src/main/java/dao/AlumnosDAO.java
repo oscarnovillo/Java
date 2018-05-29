@@ -51,7 +51,7 @@ public class AlumnosDAO {
        
         Connection con = null;
         try {
-            con = DBConnection.getInstance().getConnection();
+            con = DBConnectionPool.getInstance().getConnection();
 
             QueryRunner qr = new QueryRunner();
             ResultSetHandler<List<Alumno>> handler
@@ -62,7 +62,7 @@ public class AlumnosDAO {
             Logger.getLogger(AlumnosDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             
-            DBConnection.getInstance().cerrarConexion(con);
+            DBConnectionPool.getInstance().cerrarConexion(con);
         }
         return lista;
     }
@@ -74,7 +74,7 @@ public class AlumnosDAO {
 
         Connection con = null;
         try {
-            con = DBConnection.getInstance().getDataSourceFromServer().getConnection();
+            con = DBConnectionPool.getInstance().getDataSourceFromServer().getConnection();
             QueryRunner qr = new QueryRunner();
             ResultSetHandler<Alumno> h
               = new BeanHandler<>(Alumno.class);
@@ -83,7 +83,7 @@ public class AlumnosDAO {
         } catch (Exception ex) {
             Logger.getLogger(AlumnosDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            DBConnection.getInstance().cerrarConexion(con);
+            DBConnectionPool.getInstance().cerrarConexion(con);
         }
         return alumno;
     }
@@ -97,7 +97,7 @@ public class AlumnosDAO {
         Connection con = null;
 
         try {
-            con = DBConnection.getInstance().getConnection();
+            con = DBConnectionPool.getInstance().getConnection();
             con.setAutoCommit(false);
             QueryRunner qr = new QueryRunner();
 
@@ -107,7 +107,7 @@ public class AlumnosDAO {
               new ScalarHandler<BigInteger>(),
               "", "", "", activacion, 0);
 
-            alumno.setId(id.longValue());
+            alumno.setId(id.intValue());
             con.commit();
 
         } catch (Exception ex) {
@@ -119,7 +119,7 @@ public class AlumnosDAO {
                 Logger.getLogger(AlumnosDAO.class.getName()).log(Level.SEVERE, null, ex1);
             }
         } finally {
-            DBConnection.getInstance().cerrarConexion(con);
+            DBConnectionPool.getInstance().cerrarConexion(con);
         }
         return alumno;
 
@@ -130,7 +130,7 @@ public class AlumnosDAO {
         Connection con = null;
 
         try {
-            con = DBConnection.getInstance().getConnection();
+            con = DBConnectionPool.getInstance().getConnection();
 
             QueryRunner qr = new QueryRunner();
 
@@ -143,7 +143,7 @@ public class AlumnosDAO {
         } catch (Exception ex) {
             Logger.getLogger(AlumnosDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            DBConnection.getInstance().cerrarConexion(con);
+            DBConnectionPool.getInstance().cerrarConexion(con);
         }
         return alumno;
 
@@ -154,7 +154,7 @@ public class AlumnosDAO {
     public List<Alumno> getAllAlumnosJDBCTemplate() {
 
         JdbcTemplate jtm = new JdbcTemplate(
-          DBConnection.getInstance().getDataSource());
+          DBConnectionPool.getInstance().getDataSource());
         List<Alumno> alumnos = jtm.query("Select * from ALUMNOS WHERE ID = ?",
           new BeanPropertyRowMapper(Alumno.class),1);
 
@@ -164,7 +164,7 @@ public class AlumnosDAO {
     public int updateJDBCTemplate(Alumno a) {
 
         JdbcTemplate jtm = new JdbcTemplate(
-          DBConnection.getInstance().getDataSource());
+          DBConnectionPool.getInstance().getDataSource());
         String updateQuery = "update ALUMNOS set NOMBRE = ? where id = ?";
         int filas = jtm.update(updateQuery, a.getId(), a.getNombre());
        
@@ -176,7 +176,7 @@ public class AlumnosDAO {
     public Alumno addUserSimpleJDBCTemplate(Alumno a) {
 
         TransactionDefinition txDef = new DefaultTransactionDefinition();
-        DataSourceTransactionManager transactionManager = new DataSourceTransactionManager(DBConnection.getInstance().getDataSource());
+        DataSourceTransactionManager transactionManager = new DataSourceTransactionManager(DBConnectionPool.getInstance().getDataSource());
         TransactionStatus txStatus = transactionManager.getTransaction(txDef);
 
         try {
@@ -189,7 +189,7 @@ public class AlumnosDAO {
             parameters.put("NOMBRE", a.getNombre());
             parameters.put("FECHA_NACIMIENTO", a.getFecha_nacimiento());
             parameters.put("MAYOR_EDAD", a.getMayor_edad());
-            a.setId(jdbcInsert.executeAndReturnKey(parameters).longValue());
+            a.setId(jdbcInsert.executeAndReturnKey(parameters).intValue());
             transactionManager.commit(txStatus);
 
         } catch (Exception e) {
@@ -207,13 +207,13 @@ public class AlumnosDAO {
     public Alumno addUserJDBCTemplate(Alumno a) {
 
         SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(
-          DBConnection.getInstance().getDataSource()).withTableName("ALUMNOS").usingGeneratedKeyColumns("ID");
+          DBConnectionPool.getInstance().getDataSource()).withTableName("ALUMNOS").usingGeneratedKeyColumns("ID");
         Map<String, Object> parameters = new HashMap<String, Object>();
 
         parameters.put("NOMBRE", a.getNombre());
         parameters.put("FECHA_NACIMIENTO", a.getFecha_nacimiento());
         parameters.put("MAYOR_EDAD", a.getMayor_edad());
-        a.setId(jdbcInsert.executeAndReturnKey(parameters).longValue());
+        a.setId(jdbcInsert.executeAndReturnKey(parameters).intValue());
         return a;
     }
 
